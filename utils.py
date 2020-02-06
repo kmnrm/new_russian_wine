@@ -15,14 +15,20 @@ def make_beverage_card(beverage_description):
     promo = 'Выгодное предложение'
     if promo in beverage_description:
         beverage_description = beverage_description.replace(promo, '').strip()
-        beverage_card['on_promo'] = 'Yes'
+        beverage_card['on_promo'] = True
     else:
-        beverage_card['on_promo'] = 'No'
+        beverage_card['on_promo'] = False
     beverage_props = beverage_description.split('\n')
     for prop in beverage_props:
         (category, category_value) = prop.split(': ')
         category = translate_category(category)
         beverage_card[category] = category_value
+    beverage_sort = beverage_card['sort']
+    if not beverage_sort:
+        del beverage_card['sort']
+        beverage_card['has_sort'] = False
+    else:
+        beverage_card['has_sort'] = True
     return beverage_card
 
 
