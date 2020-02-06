@@ -1,11 +1,11 @@
 import datetime
 
-def translate_category(category):
-    if category == 'Название':
+def translate_prop_name(prop_name):
+    if prop_name == 'Название':
         return 'name'
-    if category == 'Сорт':
+    if prop_name == 'Сорт':
         return 'sort'
-    if category == 'Цена':
+    if prop_name == 'Цена':
         return 'price'
     return 'image'
 
@@ -20,9 +20,9 @@ def make_beverage_card(beverage_description):
         beverage_card['on_promo'] = False
     beverage_props = beverage_description.split('\n')
     for prop in beverage_props:
-        (category, category_value) = prop.split(': ')
-        category = translate_category(category)
-        beverage_card[category] = category_value
+        prop_name, prop_value = prop.split(': ')
+        prop_name = translate_prop_name(prop_name)
+        beverage_card[prop_name] = prop_value
     beverage_sort = beverage_card['sort']
     if not beverage_sort:
         del beverage_card['sort']
