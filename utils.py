@@ -35,15 +35,14 @@ def make_beverage_card(beverage_description):
 def allot_beverages_from_file(products_text_catalog):
     groups_names = []
     beverages_groups = []
-    with open(products_text_catalog, "r", encoding="utf8") as products:
-        for products_block in products.read().split('\n\n\n'):
-            if not '#' in products_block:
-                beverages_group = products_block
-                beverages_groups.append(beverages_group)
-            else:
-                group_name = products_block.replace('# ', '')
-                group_name = group_name.replace('\ufeff', '')
-                groups_names.append(group_name)
+    for products_block in products_text_catalog.read().split('\n\n\n'):
+        if not '#' in products_block:
+            beverages_group = products_block
+            beverages_groups.append(beverages_group)
+        else:
+            group_name = products_block.replace('# ', '')
+            group_name = group_name.replace('\ufeff', '')
+            groups_names.append(group_name)
     beverages_allotted = dict(zip(groups_names, beverages_groups))
     return beverages_allotted
 

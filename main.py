@@ -10,7 +10,10 @@ env = Environment(
 template = env.get_template('template.html')
 
 winery_age = utils.get_the_age(1920)
-beverages_catalog = utils.create_beverages_catalog('products.txt')
+products_text_catalog = 'products.txt' #ЗАМЕЧАНИЕ №10 ПРО КОНФИГ -- ЧТО-ТО НЕ ДОХОДИТ ДО МЕНЯ, ПОДТОЛКНИТЕ ЕЩЕ ;-)
+
+with open(products_text_catalog, "r", encoding="utf8") as products:
+    beverages_catalog = utils.create_beverages_catalog(products)
 
 rendered_page = template.render(
     winery_age=winery_age,
