@@ -13,11 +13,9 @@ def translate_prop_name(prop_name):
 def make_beverage_card(beverage_description):
     beverage_card = {}
     promo = 'Выгодное предложение'
-    if promo in beverage_description:
+    beverage_card['on_promo'] = promo in beverage_description
+    if beverage_card['on_promo']:
         beverage_description = beverage_description.replace(promo, '').strip()
-        beverage_card['on_promo'] = True
-    else:
-        beverage_card['on_promo'] = False
     beverage_props = beverage_description.split('\n')
     for prop in beverage_props:
         prop_name, prop_value = prop.split(': ')
