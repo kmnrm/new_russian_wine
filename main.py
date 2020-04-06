@@ -1,6 +1,13 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import utils
+import argparse
+
+parser = argparse.ArgumentParser(
+    description='This program adds product catalog to the web-site'
+)
+parser.add_argument('catalog', help='Product catalog, that is to be added.')
+args = parser.parse_args()
 
 env = Environment(
     loader=FileSystemLoader('.'),
@@ -10,7 +17,8 @@ env = Environment(
 template = env.get_template('template.html')
 
 winery_age = utils.get_the_age(1920)
-products_text_catalog = 'products.txt' #ЗАМЕЧАНИЕ №10 ПРО КОНФИГ -- ЧТО-ТО НЕ ДОХОДИТ ДО МЕНЯ, ПОДТОЛКНИТЕ ЕЩЕ ;-)
+
+products_text_catalog = args.catalog
 
 with open(products_text_catalog, "r", encoding="utf8") as products_catalog:
     products = products_catalog.read()
